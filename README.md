@@ -21,6 +21,8 @@ In general the Node.js globals `Buffer` and `global` need to be polyfilled. If y
 
 ## Note on tsconfig.json
 
+The lowest supported `tsconfig.json` target is ES2022 and also requires lib ES2022 to be specified, due to usage of `Error.cause`.
+
 Because of the usage of `enum`s, the [erasableSyntaxOnly](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html#the---erasablesyntaxonly-option) `compilerOption` in your `tsconfig.json` has to be turned off.
 
 ## React + TypeScript + Vite
