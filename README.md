@@ -1,4 +1,25 @@
-# React + TypeScript + Vite
+# dKiT demo
+
+## Note on dependecies
+
+Pinned dependency versions in `package.json` using [resolutions](https://classic.yarnpkg.com/lang/en/docs/selective-version-resolutions/#toc-how-to-use-it)
+
+```
+{
+  "resolutions": {
+    "@noble/curves": "~1.6.0",
+    "@noble/hashes": "~1.5.0"
+  }
+}
+```
+
+Also note [overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides) for other package managers.
+
+## Note on polyfills
+
+In general the Node.js globals `Buffer` and `global` need to be polyfilled. If you're using vite it's as easy as installing and configuring [vite-plugin-node-polyfills](https://npmjs.com/package/vite-plugin-node-polyfills)
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

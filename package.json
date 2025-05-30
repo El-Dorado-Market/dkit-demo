@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@doritokit/sdk": "^2.2.22",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -24,6 +25,11 @@
     "globals": "^16.0.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-node-polyfills": "^0.23.0"
+  },
+  "resolutions": {
+    "@noble/curves": "~1.6.0",
+    "@noble/hashes": "~1.5.0"
   }
 }
