@@ -19,6 +19,10 @@ Also note [overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json
 
 In general the Node.js globals `Buffer` and `global` need to be polyfilled. If you're using vite it's as easy as installing and configuring [vite-plugin-node-polyfills](https://npmjs.com/package/vite-plugin-node-polyfills)
 
+## Note on tsconfig.json
+
+Because of the usage of `enum`s, the [erasableSyntaxOnly](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html#the---erasablesyntaxonly-option) `compilerOption` in your `tsconfig.json` has to be turned off.
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
