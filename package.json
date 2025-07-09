@@ -10,26 +10,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@doritokit/sdk": "^2.2.22",
+    "@doritokit/core": "4.0.0-beta.23",
+    "@doritokit/helpers": "3.0.0-beta.16",
+    "@doritokit/plugins": "1.0.0-beta.22",
+    "@doritokit/sdk": "3.0.0-beta.26",
+    "@doritokit/toolboxes": "1.0.0-beta.22",
+    "@doritokit/wallets": "3.0.0-beta.25",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.25.0",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react": "^4.4.1",
-    "eslint": "^9.25.0",
+    "@eslint/js": "^9.30.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "eslint": "^9.30.1",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
     "typescript": "~5.8.3",
-    "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5",
-    "vite-plugin-node-polyfills": "^0.23.0"
-  },
-  "resolutions": {
-    "@noble/curves": "~1.6.0",
-    "@noble/hashes": "~1.5.0"
+    "typescript-eslint": "^8.36.0",
+    "vite": "^7.0.3",
+    "vite-plugin-node-polyfills": "^0.24.0"
   }
 }

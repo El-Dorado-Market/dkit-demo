@@ -10,7 +10,9 @@ export default defineConfig({
   // },
   plugins: [
     react(),
-    nodePolyfills({ globals: { Buffer: true, global: true } }),
+    nodePolyfills({
+      include: ['crypto', 'http', 'https', 'stream', 'util', 'vm'],
+    }),
   ],
   server: {
     port: 3000,

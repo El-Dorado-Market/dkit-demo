@@ -4,7 +4,6 @@ import {
   createSwapKit as createDoritoKit,
   Chain,
   type TokenV2,
-  type CryptoChain,
   type ChainWallet,
   ProviderName,
   type QuoteRequest,
@@ -14,22 +13,10 @@ import {
 
 // #region Environment variables
 const api = import.meta.env.VITE_API;
-const covalentApiKey = import.meta.env.VITE_COVALENT_API_KEY;
-const ethplorerApiKey = import.meta.env.VITE_ETHPLORER_API_KEY;
-const utxoApiKey = import.meta.env.VITE_UTXO_API_KEY;
 // #endregion
 
 // #region client
-const config = {
-  covalentApiKey,
-  ethplorerApiKey,
-  utxoApiKey,
-  chainflipBrokerConfig: {
-    useChainflipSDKBroker: true,
-    chainflipBrokerUrl: 'https://node.eldorado.market/chainflip-broker',
-  },
-};
-const client = createDoritoKit({ config });
+const client = createDoritoKit();
 // #endregion
 
 // #region utilities
@@ -41,11 +28,11 @@ const getAssetId = ({
   return chain + '.' + ticker + ((address && '-' + address) || '');
 };
 
-type Wallet = ChainWallet<CryptoChain>;
+type Wallet = ChainWallet<Chain>;
 type Wallets = Array<Wallet>;
-type WalletsMap = { [K in CryptoChain]?: Wallet };
+type WalletsMap = { [K in Chain]?: Wallet };
 
-const chains = [Chain.Base, Chain.THORChain] satisfies Array<CryptoChain>;
+const chains = [Chain.Base, Chain.THORChain] satisfies Array<Chain>;
 // #endregion
 
 function App() {
@@ -84,7 +71,7 @@ function App() {
     const mnemonic =
       mnemonicInput instanceof HTMLInputElement && mnemonicInput.value.trim();
     if (!mnemonic) {
-      alert('Cannot conneect wallet, missing mneomnic');
+      alert('Cannot connect wallet, missing mnemonic');
       return;
     }
     client.connectKeystore(chains, mnemonic).then(() => {
