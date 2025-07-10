@@ -1,10 +1,32 @@
 # dKiT demo
 
-## Note on dependecies
+## Scaffold
 
-Pinned dependency versions in `package.json` using [resolutions](https://classic.yarnpkg.com/lang/en/docs/selective-version-resolutions/#toc-how-to-use-it)
+Skip if you have an existing project.
+
+To scaffold the project, we are going to use [vite](https://vite.dev/guide/#scaffolding-your-first-vite-project) with [the react-ts template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts). Feel free to pick a different vite template or replace vite with the build tool of your choice. The bottom line is that you are able to process javascript modules.
+
+As for the package manager, in this example, we are going to use `bun`. Though you may as well opt for `npm`, `yarn`, `pnpm` or `deno`.
+Make sure to replace `my-app` with your project name.
+
+```bash
+bun create vite my-app --template react-ts
 
 ```
+
+Once the project is scaffolded, cd into the newly created directory.
+
+```
+cd my-app
+
+```
+
+## Configure package resolutions
+
+Pin the following dependency versions in `package.json` using [resolutions](https://classic.yarnpkg.com/lang/en/docs/selective-version-resolutions/#toc-how-to-use-it). In the case of `npm`
+reference [overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides). Either by manually updating the resolutions section in your `package.json`
+
+```json
 {
   "resolutions": {
     "@noble/curves": "~1.6.0",
@@ -13,69 +35,71 @@ Pinned dependency versions in `package.json` using [resolutions](https://classic
 }
 ```
 
-Also note [overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides) for other package managers.
+Or by running the command (which requires jq to be in the path):
 
-## Note on polyfills
+```bash
+cat <<< $(jq '.resolutions = {"@noble/curves":"~1.6.0","@noble/hashes":"~1.5.0"}' \
+  package.json) > package.json
+```
 
-In general the Node.js globals `Buffer` and `global` need to be polyfilled. If you're using vite it's as easy as installing and configuring [vite-plugin-node-polyfills](https://npmjs.com/package/vite-plugin-node-polyfills)
+## Install
 
-## Note on tsconfig.json
+In respect to the package manager you chose prior, install the `@doritokit/sdk` which will also install the rest of the project's dependencies.
+
+```
+bun install @doritokit/sdk
+
+```
+
+## Configure polyfills and globals
+
+Node.js globals `Buffer` and `global` need to be polyfilled. If you're using vite, it's as easy as installing and configuring [vite-plugin-node-polyfills](https://npmjs.com/package/vite-plugin-node-polyfills). Firstly, add the `vite-plugin-node-polyfills` package as a development dependency:
+
+```bash
+bun add -D vite-plugin-node-polyfills
+```
+
+For a concrete example reference the project's `vite.config.ts`, specifically, the plugins section:
+
+```js
+import { defineConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+
+export default defineConfig = ({
+  plugins: [
+    nodePolyfills({ globals: { Buffer: true, global: true } }),
+    // other plugins
+  ],
+  server: { // optionally configure the dev server port
+    port: 3000,
+  },
+  // rest of the config
+})
+```
+
+## Configure tsconfig.json (if applicable)
 
 The lowest supported `tsconfig.json` target is ES2022 and also requires lib ES2022 to be specified, due to usage of `Error.cause`.
 
 Because of the usage of `enum`s, the [erasableSyntaxOnly](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html#the---erasablesyntaxonly-option) `compilerOption` in your `tsconfig.json` has to be turned off.
 
-## React + TypeScript + Vite
+Below is a minimal example. For a more realistic configuration look up the project's `tsconfig.app.json`.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "erasableSyntaxOnly": false
+  }
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Start the dev server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+In the context of a vite project, by convention the script to run the development server is called `dev`.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+bun run dev
 ```
+
+With the dev server running, navigate to `http://localhost:3000` where `3000` is to be replaced with the custom port number or the vite default `5173`.
