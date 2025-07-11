@@ -10,12 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@doritokit/core": "4.0.0-beta.23",
-    "@doritokit/helpers": "3.0.0-beta.16",
-    "@doritokit/plugins": "1.0.0-beta.22",
-    "@doritokit/sdk": "3.0.0-beta.26",
-    "@doritokit/toolboxes": "1.0.0-beta.22",
-    "@doritokit/wallets": "3.0.0-beta.25",
+    "@noble/hashes": "^1.8.0",
+    "@swapkit/core": "beta",
+    "@swapkit/helpers": "beta",
+    "@swapkit/plugins": "beta",
+    "@swapkit/sdk": "beta",
+    "@swapkit/toolboxes": "beta",
+    "@swapkit/wallets": "beta",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

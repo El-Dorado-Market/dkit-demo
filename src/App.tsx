@@ -9,7 +9,7 @@ import {
   type QuoteRequest,
   type QuoteResponse,
   type QuoteResponseRoute,
-} from '@doritokit/sdk';
+} from '@swapkit/sdk';
 
 // #region Environment variables
 const api = import.meta.env.VITE_API;
