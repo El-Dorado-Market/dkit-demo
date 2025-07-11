@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@doritokit/sdk": "^2.2.22",
+    "@swapkit/sdk": "^2.4.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -30,6 +30,6 @@
   },
   "resolutions": {
     "@noble/curves": "~1.6.0",
-    "@noble/hashes": "~1.5.0"
+    "@noble/hashes": "~1.7.1"
   }
 }
